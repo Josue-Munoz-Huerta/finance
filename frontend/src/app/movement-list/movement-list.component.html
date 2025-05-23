@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Descripción</th>
+      <th>Categoría</th>
+      <th>Tipo</th>
+      <th>Monto</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let mov of movements">
+      <td>{{ mov.date | date:'dd/MM/yyyy' }}</td>
+      <td>{{ mov.description }}</td>
+      <td>{{ mov.category }}</td>
+      <td [class.income]="mov.type === 'income'" [class.expense]="mov.type === 'expense'">
+        {{ mov.type === 'income' ? 'Ingreso' : 'Gasto' }}
+      </td>
+      <td [class.income]="mov.type === 'income'" [class.expense]="mov.type === 'expense'">
+        {{ mov.amount | currency:'USD':'symbol':'1.2-2' }}
+      </td>
+      <td class="actions">
+        <button (click)="deleteMovement(mov.id!)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
